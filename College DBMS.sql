@@ -1,0 +1,337 @@
+CREATE DATABASE sdbms;
+USE sdbms;
+
+CREATE TABLE course(c_id VARCHAR(20) PRIMARY KEY,c_name VARCHAR(30),c_dur_years VARCHAR(20),c_fees DOUBLE);
+
+CREATE TABLE student(s_id INT PRIMARY KEY,c_id VARCHAR(20),s_name VARCHAR(30),s_phone VARCHAR(20),s_dob DATE,CONSTRAINT ci FOREIGN KEY(c_id) REFERENCES course(c_id));
+
+CREATE TABLE teacher(t_id INT PRIMARY KEY,t_name VARCHAR(30),t_phone VARCHAR(20),t_course VARCHAR(30),t_salary DOUBLE);
+
+CREATE TABLE fees(f_id INT PRIMARY KEY,s_id INT,c_id VARCHAR(20),amount DOUBLE,pay_date DATE, CONSTRAINT si FOREIGN KEY(s_id) REFERENCES student(s_id),CONSTRAINT ci3 FOREIGN KEY(c_id) REFERENCES course(c_id));
+
+CREATE TABLE stud_perf(p_id INT PRIMARY KEY,s_id INT,marks INT, CONSTRAINT si2 FOREIGN KEY(s_id) REFERENCES student(s_id));
+
+CREATE TABLE attendence(a_id INT PRIMARY KEY,s_id INT, attendence VARCHAR(10),CONSTRAINT s3 FOREIGN KEY(s_id) REFERENCES student(s_id));
+
+-- Populate table course
+INSERT INTO course VALUES('1001IT','BScIT',3,90000);
+INSERT INTO course VALUES('1002CS','BScCS',3,100000);
+INSERT INTO course VALUES('1003BCA','BCA',3,100400);
+INSERT INTO course VALUES('1004BArch','BArch',5,300400);
+INSERT INTO course VALUES('1005BAP','BA Psychology',3,78000);
+INSERT INTO course VALUES('1006BCom','BCom',3,60000);
+INSERT INTO course VALUES('1007BT','Biotech',4,100000);
+INSERT INTO course VALUES('1008BE','BE',4,708000);
+INSERT INTO course VALUES('1009MIT','MScIT',2,202600);
+INSERT INTO course VALUES('1010MCA','MCA',2,300000);
+INSERT INTO course VALUES('1011BA','BBA',3,400000);
+INSERT INTO course VALUES('1012HSC','Science PCM ',2,150000);
+INSERT INTO course VALUES('1013HSC','Commerce',2,50000);
+INSERT INTO course VALUES('1014HSC','Arts',2,30000);
+INSERT INTO course VALUES('1015BM','BA Mathematics',3,100000);
+INSERT INTO course VALUES('1016HSC','Science PCMB ',2,120000);
+
+-- Populate table student
+INSERT INTO student VALUES(101,'1001IT','esha shetty','9892250485','2002-10-24');
+INSERT INTO student VALUES(102,'1001IT','tisha teli','9229850485','2003-02-19'); 
+INSERT INTO student VALUES(103,'1003BCA','manali thakur','9229850000','2003-08-05');
+INSERT INTO student VALUES(104,'1013HSC','vardan choudary','7429850000','2006-01-25');
+INSERT INTO student VALUES(105,'1005BAP','madhav mishra','7429850965','2003-03-13');
+INSERT INTO student VALUES(106,'1007BT','shweta tiwari','9894280485','2005-09-10'); 
+INSERT INTO student VALUES(107,'1014HSC','komal rajput','9004280485','2005-02-22');
+INSERT INTO student VALUES(108,'1010MCA','diya sharma','9004281578','2001-12-19');
+INSERT INTO student VALUES(109,'1008BE','ketan modi','9004281578','2003-05-21');
+INSERT INTO student VALUES(110,'1009MIT','kovya kumari','1234567890','2004-12-18');
+INSERT INTO student VALUES(111,'1002CS','aastha more','154862394','2002-07-28');
+INSERT INTO student VALUES(112,'1001IT','risha teli','9231850485','2001-09-20'); 
+INSERT INTO student VALUES(113,'1003BCA','pranav thakur','9996850000','2001-07-05');
+INSERT INTO student VALUES(114,'1012HSC','jiya morbia','9002648952','2003-02-12'  );
+INSERT INTO student VALUES(115,'1004BArch','bhumi morbia','9234856791','2001-04-06');
+INSERT INTO student VALUES(116,'1010MCA','daya gada','7564891234','2001-11-30');
+INSERT INTO student VALUES(117,'1015BM','sundari shetty','2223458974','2001-08-11'  );
+INSERT INTO student VALUES(118,'1003BCA','sarvesh hegde','9234816597','2003-08-10'  );
+INSERT INTO student VALUES(119,'1007BT','dinesh gurav','9051648972','2001-12-19'  );
+INSERT INTO student VALUES(120,'1006BCom','ryan pinto','9004456578','2003-07-02'  );
+INSERT INTO student VALUES(121,'1010MCA','benjamin christ','9562281578','2004-09-12'  );
+INSERT INTO student VALUES(122,'1013HSC','payal more','5617894521','2002-03-20'  );
+INSERT INTO student VALUES(123,'1011BA','dhanashree bhurke','9486127894','2002-07-11'  );
+INSERT INTO student VALUES(124,'1006BCom','ganesh iyer','9013567512','2001-07-07'  );
+INSERT INTO student VALUES(125,'1007BT','archana sahoo','9856424856','2002-10-13'  );
+INSERT INTO student VALUES(126,'1010MCA','pooja gupta','9004281578','2003-09-26'  );
+INSERT INTO student VALUES(127,'1015BM','sonalika bhide','9045789632','2002-08-15'  );
+INSERT INTO student VALUES(128,'1013HSC','joydeep dutta','2233445566','2002-11-21'  );
+INSERT INTO student VALUES(129,'1003BCA','abdul khan','9234856791','2003-10-17'  );
+INSERT INTO student VALUES(130,'1008BE','sania mirza','9457832659','2001-01-22'  );
+INSERT INTO student VALUES(131,'1001IT','esha deol','7845147852','2001-12-14'  );
+INSERT INTO student VALUES(132,'1010MCA','jiya mehta','9145628778','2002-12-31'  );
+INSERT INTO student VALUES(133,'1004BArch','amrit kaur','9032165498','2001-10-19'  );
+INSERT INTO student VALUES(134,'1002CS','shraddha bhor','9147852369','2004-03-19'  );
+INSERT INTO student VALUES(135,'1006BCom','neha gupta','7896541230','2002-12-19'  );
+INSERT INTO student VALUES(136,'1005BAP','hridhika patil','92316498745','2002-02-12'  );
+INSERT INTO student VALUES(137,'1014HSC','agasthya mandalaparthy' ,'5263419878' ,'2002-10-20'  );
+INSERT INTO student VALUES(138,'1001IT','naina goyal','900400000','2002-11-01'  );
+INSERT INTO student VALUES(139,'1009MIT','ganesh reddy','95864973212','2003-12-01'  );
+INSERT INTO student VALUES(140,'1015BM','sachin patil','92316457980','2001-11-18'  );
+INSERT INTO student VALUES(141,'1012HSC','disha suvarna','45682315687','2001-05-25'  );
+INSERT INTO student VALUES(142,'1010MCA','roshan kaur','9213564879','2001-06-04'  );
+INSERT INTO student VALUES(143,'1010MCA','babita singh','9789632145','2001-09-19'  );
+INSERT INTO student VALUES(144,'1003BCA','irfan khan','02224582358','2001-09-23'  );
+INSERT INTO student VALUES(145,'1006BCom','anita naik','98956231478','2001-02-09'  );
+INSERT INTO student VALUES(146,'1004BArch','pratiksha naik','9078120478','2004-12-21'  );
+INSERT INTO student VALUES(147,'1003BCA','isha desai','8954123045','2001-12-05'  );
+INSERT INTO student VALUES(148,'1007BT','madhavi kelkar','90123459578','2003-10-14' );
+INSERT INTO student VALUES(149,'1001IT','koyal mehra','90459862585','2003-12-16' );
+INSERT INTO student VALUES(150,'1005BAP','mahesh pathak','95648623228','2002-10-02' );
+
+-- Populate table teacher
+INSERT INTO teacher VALUES(1,'shreevidya nair','9892555555','BScIT',35000);
+INSERT INTO teacher VALUES(2,'anju singh','9892250787','BScCS',50000);
+INSERT INTO teacher VALUES(3,'omkar sherkane','9892554441','BCA',36000);
+INSERT INTO teacher VALUES(4,'simran shinde','98985455155','BArch',21000);
+INSERT INTO teacher VALUES(5,'padmaja ganti','98922952151','BA Pschology',45000);
+INSERT INTO teacher VALUES(6,'deepika sharma','9892250400','BCom',56000);
+INSERT INTO teacher VALUES(7,'kuldeep prabhu','9892256457','Biotech',89000);
+INSERT INTO teacher VALUES(8,'prajakta kane','98922505455','BE',34000);
+INSERT INTO teacher VALUES(9,'rashmi patil','9585455654','MScIT',26000);
+INSERT INTO teacher VALUES(10,'sanjana bangale','98555968547','MCA',98000);
+INSERT INTO teacher VALUES(11,'alma khan','9945656521','BBA',34000);
+INSERT INTO teacher VALUES(12,'sharan sachdev','9754565255','Science PCM',76000);
+INSERT INTO teacher VALUES(13,'varsha bhogale','9491628391','Commerce',84000);
+INSERT INTO teacher VALUES(14,'dhanya vinish','9369874123','Arts',32400);
+INSERT INTO teacher VALUES(15,'vidya agnas','9894578566','BA Mathematics',64200);
+INSERT INTO teacher VALUES(16,'gopikumar pillai','97946132558','Science PCMB',23400);
+INSERT INTO teacher VALUES(17,'gajanan mhatre','9784589564','BScIT',24000);
+INSERT INTO teacher VALUES(18,'aditi altekar','9784519632','BScIT',35000);
+INSERT INTO teacher VALUES(19,'anjali sharma','9145892536','BScCA',35600);
+INSERT INTO teacher VALUES(20,'charu saraswat','9124536563','BE',25000);
+INSERT INTO teacher VALUES(21,'harsh agarwal','9551212225','Commerce',54000);
+INSERT INTO teacher VALUES(22,'laxmi nair','94819923567','Science PCM',45000);
+INSERT INTO teacher VALUES(23,'neeta kamble','9147852369','Biotech',45000);
+INSERT INTO teacher VALUES(24,'kaushal velani','9454545856','BScCS',24000);
+INSERT INTO teacher VALUES(25,'dhruv patil','97999955125','BA Mathematics',23000);
+INSERT INTO teacher VALUES(26, 'anita naik','98659655412','BA Psychology',55000);
+INSERT INTO teacher VALUES(27,'kamala ramchanran','9895465485','BCA',56000);
+INSERT INTO teacher VALUES(28,'vidya patil','9865562475','BBA',56000);
+INSERT INTO teacher VALUES(29,'sakshi patil','94455758542','BBA',47000);
+INSERT INTO teacher VALUES(30,'suresh chandra','9549845112','BArch',85000);
+INSERT INTO teacher VALUES(31,'krishna shetty','9812555222','BCom',95000);
+INSERT INTO teacher VALUES(32, 'mahesh pathak','9554545515','BA Psychology',56000);
+INSERT INTO teacher VALUES(33, 'babita singh' ,'954659556522','BScIT',35000);
+INSERT INTO teacher VALUES(34, 'hridhika patil' ,'45336526556','BScIT',55000);
+INSERT INTO teacher VALUES(35, 'jiya mehta' ,'9457812369','BCom',46500);
+INSERT INTO teacher VALUES(36,'juhi kelkar','94562318789','BCA',46500);
+INSERT INTO teacher VALUES(37,'kaushal velani','9453315566','MCA',36000);
+INSERT INTO teacher VALUES(38,'dhruvi patel','9135245411','MScIT',35600);
+INSERT INTO teacher VALUES(39,'joanna parackal','9264856741','MScIT',50000);
+INSERT INTO teacher VALUES(40,'nisha gupta','8898645929','MScIT',55000);
+INSERT INTO teacher VALUES(41,'prerna baji','9920060549','Science PCMB',25000);
+INSERT INTO teacher VALUES(42,'sukhdeep singh','9892250485','BScIT',54640);
+INSERT INTO teacher VALUES(43,'shriyan','9169142828','Science PCMB',35065);
+INSERT INTO teacher VALUES(44,'bipin chandra','9594250107','BCA',85112);
+INSERT INTO teacher VALUES(45,'neeraj mane','774826212','BScCS',54621);
+INSERT INTO teacher VALUES(46,'vishlesha hegde','7045095031','BE',35120);
+INSERT INTO teacher VALUES(47,'abhijith das','9324112157','Biotech',5460);
+INSERT INTO teacher VALUES(48,'adnan shaikh','9987503837','Biotech',42000);
+INSERT INTO teacher VALUES(49,'amey patil','8655249493','Arts',35300);
+INSERT INTO teacher VALUES(50,'ankesh pandey','9930418843','Arts',25000);
+
+-- Populate table fees
+INSERT INTO fees VALUES(1001,102,'1001IT',60000,'2023-02-02');
+INSERT INTO fees VALUES(1002,123, '1011BA',400000,'2023-05-02');
+INSERT INTO fees VALUES(1003,111, '1002CS',90000,'2023-01-10');
+INSERT INTO fees VALUES(1004,105, '1005BAP',78000,'2023-02-23');
+INSERT INTO fees VALUES(1005,132, '1010MCA',290000,'2023-01-07');
+INSERT INTO fees VALUES(1006,150, '1005BAP',78000,'2023-01-16');
+INSERT INTO fees VALUES(1007,103, '1003BCA',96000,'2022-10-15');
+INSERT INTO fees VALUES(1008,112, '1001IT',80000,'2022-12-13');
+INSERT INTO fees VALUES(1009,106, '1007BT',100000,'2023-03-18');
+INSERT INTO fees VALUES(1010,107,'1014HSC',30000,'2023-01-25');
+INSERT INTO fees VALUES(1011,137, '1014HSC',30000,'2023-05-13');
+INSERT INTO fees VALUES(1012,138, '1001IT',90000,'2023-02-18');
+INSERT INTO fees VALUES(1013,141, '1012HSC',150000,'2023-03-07');
+INSERT INTO fees VALUES(1014,129, '1003BCA',55000,'2022-12-04');
+INSERT INTO fees VALUES(1015,139, '1009MIT',102600,'2022-12-12');
+INSERT INTO fees VALUES(1016,115, '1004BArch',240000,'2023-05-01');
+INSERT INTO fees VALUES(1017,121, '1010MCA',200000,'2023-02-02');
+INSERT INTO fees VALUES(1018,109, '1008BE',500000,'2023-02-16');
+INSERT INTO fees VALUES(1019,101, '1001IT',40000,'2023-04-12');
+INSERT INTO fees VALUES(1020,126, '1010MCA',300000,'2023-02-02');
+INSERT INTO fees VALUES(1021,135, '1006BCom',60000,'2022-09-14');
+INSERT INTO fees VALUES(1022,104, '1013HSC',50000,'2023-02-02');
+INSERT INTO fees VALUES(1023,113, '1003BCA',70000,'2023-02-17');
+INSERT INTO fees VALUES(1024,124, '1006BCom',60000,'2023-02-09');
+INSERT INTO fees VALUES(1025,131, '1001IT',90000,'2023-01-24');
+INSERT INTO fees VALUES(1026,146, '1004BArch',160000,'2023-02-24');
+INSERT INTO fees VALUES(1027,108, '1010MCA',90000,'2022-08-02');
+INSERT INTO fees VALUES(1028,114, '1012HSC',150000,'2023-02-16');
+INSERT INTO fees VALUES(1029,125, '1007BT',100000,'2023-02-12');
+INSERT INTO fees VALUES(1030,133, '1004BArch',300400,'2022-08-26');
+INSERT INTO fees VALUES(1031,142, '1010MCA',100000,'2023-04-09');
+INSERT INTO fees VALUES(1032,110, '1009MIT',202600,'2023-05-28');
+INSERT INTO fees VALUES(1033,116, '1010MCA', 100000,'2022-12-22');
+INSERT INTO fees VALUES(1034,122,'1013HSC',50000,'2023-02-02');
+INSERT INTO fees VALUES(1035,134, '1002CS',80000,'2022-11-05');
+INSERT INTO fees VALUES(1036,143, '1010MCA',200000,'2022-10-22');
+INSERT INTO fees VALUES(1037,127, '1015BM',90000,'2023-05-28');
+INSERT INTO fees VALUES(1038,136, '1005BAP',78000,'2022-09-27');
+INSERT INTO fees VALUES(1039,144, '1003BCA',85000,'2023-04-14');
+INSERT INTO fees VALUES(1040,117, '1015BM',100000,'2023-02-02');
+INSERT INTO fees VALUES(1041,128, '1013HSC',50000,'2022-10-24');
+INSERT INTO fees VALUES(1042,140, '1015BM',100000,'2023-02-02');
+INSERT INTO fees VALUES(1043,120, '1006BCom',40000,'2023-01-29');
+INSERT INTO fees VALUES(1044,118, '1003BCA',100400,'2023-02-08');
+INSERT INTO fees VALUES(1045,130, '1008BE',400800,'2023-05-02');
+INSERT INTO fees VALUES(1046,119, '1007BT',90000,'2022-12-27');
+INSERT INTO fees VALUES(1047,145, '1006BCom',60000,'2023-02-25');
+INSERT INTO fees VALUES(1048,147, '1003BCA',100400,'2023-05-02');
+INSERT INTO fees VALUES(1049,148, '1007BT',100000,'2023-03-28');
+INSERT INTO fees VALUES(1050,149, '1001IT',20000,'2022-08-19');
+INSERT INTO fees VALUES(1051, 149, '1001IT',40000,'2023-04-19');
+INSERT INTO fees VALUES(1052, 129, '1003BCA',40000,'2023-02-04');
+INSERT INTO fees VALUES(1053, 120, '1006BCom',20000,'2023-03-14');
+INSERT INTO fees VALUES(1054, 139, '1009MIT',50000,'2023-02-12');
+INSERT INTO fees VALUES(1055, 116, '1010MCA', 100000,'2023-03-24');
+INSERT INTO fees VALUES(1056, 108, '1010MCA',100000,'2023-05-17');
+
+-- Populate table attendance
+INSERT INTO attendence VALUES(10001,101,94);
+INSERT INTO attendence VALUES(10002,102,78);
+INSERT INTO attendence VALUES(10003,103,76);
+INSERT INTO attendence VALUES(10004,104,84);
+INSERT INTO attendence VALUES(10005,105,83);
+INSERT INTO attendence VALUES(10006,106,78);
+INSERT INTO attendence VALUES(10007,107,74);
+INSERT INTO attendence VALUES(10008,108,45);
+INSERT INTO attendence VALUES(10009,109,98);
+INSERT INTO attendence VALUES(10010,111,100);
+INSERT INTO attendence VALUES(10011,112,96);
+INSERT INTO attendence VALUES(10012,113,56);
+INSERT INTO attendence VALUES(10013,114,99);
+INSERT INTO attendence VALUES(10014,115,70);
+INSERT INTO attendence VALUES(10015,116,63);
+INSERT INTO attendence VALUES(10016,117,52);
+INSERT INTO attendence VALUES(10017,118,45);
+INSERT INTO attendence VALUES(10018,119,98);
+INSERT INTO attendence VALUES(10019,120,87);
+INSERT INTO attendence VALUES(10020,121,68);
+INSERT INTO attendence VALUES(10021,122,85);
+INSERT INTO attendence VALUES(10022,123,82);
+INSERT INTO attendence VALUES(10023,124,79);
+INSERT INTO attendence VALUES(10024,125,12);
+INSERT INTO attendence VALUES(10025,126,78);
+INSERT INTO attendence VALUES(10026,127,66);
+INSERT INTO attendence VALUES(10027,128,80);
+INSERT INTO attendence VALUES(10028,129,91);
+INSERT INTO attendence VALUES(10029,130,73);
+INSERT INTO attendence VALUES(10030,131,100);
+INSERT INTO attendence VALUES(10031,132,90);
+INSERT INTO attendence VALUES(10032,133,47);
+INSERT INTO attendence VALUES(10033,134,55);
+INSERT INTO attendence VALUES(10034,135,68);
+INSERT INTO attendence VALUES(10035,136,95);
+INSERT INTO attendence VALUES(10036,137,45);
+INSERT INTO attendence VALUES(10037,138,45);
+INSERT INTO attendence VALUES(10038,139,85);
+INSERT INTO attendence VALUES(10039,140,48);
+INSERT INTO attendence VALUES(10040,141,79);
+INSERT INTO attendence VALUES(10041,142,70);
+INSERT INTO attendence VALUES(10042,143,53);
+INSERT INTO attendence VALUES(10043,144,94);
+INSERT INTO attendence VALUES(10044,145,85);
+INSERT INTO attendence VALUES(10045,146,94);
+INSERT INTO attendence VALUES(10046,147,86);
+INSERT INTO attendence VALUES(10047,148,75);
+INSERT INTO attendence VALUES(10048,149,78);
+INSERT INTO attendence VALUES(10049,150,94);
+INSERT INTO attendence VALUES(10050,110,74);
+
+-- Populate table stud_perf
+INSERT INTO stud_perf VALUES(1,101,86);
+INSERT INTO stud_perf VALUES(2,102,94);
+INSERT INTO stud_perf VALUES(3,103,45);
+INSERT INTO stud_perf VALUES(4,104,89);
+INSERT INTO stud_perf VALUES(5,105,45);
+INSERT INTO stud_perf VALUES(6,106,89);
+INSERT INTO stud_perf VALUES(7,107,86);
+INSERT INTO stud_perf VALUES(8,108,56);
+INSERT INTO stud_perf VALUES(9,109,79);
+INSERT INTO stud_perf VALUES(10,110,76);
+INSERT INTO stud_perf VALUES(11,111,36);
+INSERT INTO stud_perf VALUES(12,112,88);
+INSERT INTO stud_perf VALUES(13,113,86);
+INSERT INTO stud_perf VALUES(14,114,94);
+INSERT INTO stud_perf VALUES(15,115,76);
+INSERT INTO stud_perf VALUES(16,116,74);
+INSERT INTO stud_perf VALUES(17,117,48);
+INSERT INTO stud_perf VALUES(18,118,65);
+INSERT INTO stud_perf VALUES(19,119,87);
+INSERT INTO stud_perf VALUES(20,120,99);
+INSERT INTO stud_perf VALUES(21,121,85);
+INSERT INTO stud_perf VALUES(22,122,25);
+INSERT INTO stud_perf VALUES(23,123,79);
+INSERT INTO stud_perf VALUES(24,124,88);
+INSERT INTO stud_perf VALUES(25,125,71);
+INSERT INTO stud_perf VALUES(26,126,72);
+INSERT INTO stud_perf VALUES(27,127,86);
+INSERT INTO stud_perf VALUES(28,128,86);
+INSERT INTO stud_perf VALUES(29,129,79);
+INSERT INTO stud_perf VALUES(30,130,74);
+INSERT INTO stud_perf VALUES(31,131,97);
+INSERT INTO stud_perf VALUES(32,132,98);
+INSERT INTO stud_perf VALUES(33,133,84);
+INSERT INTO stud_perf VALUES(34,134,81);
+INSERT INTO stud_perf VALUES(35,135,80);
+INSERT INTO stud_perf VALUES(36,136,93);
+INSERT INTO stud_perf VALUES(37,137,96);
+INSERT INTO stud_perf VALUES(38,138,73);
+INSERT INTO stud_perf VALUES(39,139,72);
+INSERT INTO stud_perf VALUES(40,140,55);
+INSERT INTO stud_perf VALUES(41,141,32);
+INSERT INTO stud_perf VALUES(42,142,73);
+INSERT INTO stud_perf VALUES(43,143,38);
+INSERT INTO stud_perf VALUES(44,144,12);
+INSERT INTO stud_perf VALUES(45,145,80);
+INSERT INTO stud_perf VALUES(46,146,99);
+INSERT INTO stud_perf VALUES(47,147,58);
+INSERT INTO stud_perf VALUES(48,148,19);
+INSERT INTO stud_perf VALUES(49,149,90);
+INSERT INTO stud_perf VALUES(50,150,91);
+
+-- SUBQUERIES
+
+-- Retrieve the names of all students who scored higher than the average marks in the exam.
+SELECT s_id,marks FROM stud_perf WHERE marks > (SELECT AVG(marks) FROM stud_perf);
+
+-- Retrieve names of student whose attendance is less than 75 percent.
+SELECT s_name FROM student WHERE s_id IN (SELECT s_id FROM attendence WHERE attendence < 75);
+
+-- Retrieve name,id of students who paid their fees in one go. 
+SELECT s_id,s_name FROM student WHERE s_id IN (SELECT s_id FROM fees WHERE amount = (SELECT c_fees FROM course WHERE c_id = fees.c_id));
+
+-- Retrieve teacher with highest, second highest salary.
+
+-- Highest 
+SELECT t_id,t_name,t_course,t_salary AS "highest salary" FROM teacher WHERE t_salary=(SELECT MAX(t_salary) FROM teacher);
+
+-- Second highest
+SELECT t_id,t_name,t_course,t_salary AS "second highest salary" FROM teacher WHERE t_salary=(SELECT MAX(t_salary) FROM teacher WHERE t_salary<>(SELECT MAX(t_salary) FROM teacher));
+
+-- Retrieve course name where number of students is less than 2.
+SELECT c_id,c_name FROM course WHERE c_id IN (SELECT c_id FROM student GROUP BY c_id HAVING COUNT(*)<2);
+
+-- JOINS
+
+-- Retrieve details of amount of fees paid by the student.
+SELECT fees.s_id,course.c_id,SUM(amount) AS paid,course.c_fees FROM fees INNER JOIN course ON fees.c_id=course.c_id GROUP BY s_id;
+
+-- Retrieve details of balance fees of the student.
+SELECT fees.s_id,course.c_id,c_fees-SUM(amount) AS balance,course.c_fees FROM fees INNER JOIN course ON fees.c_id=course.c_id GROUP BY s_id;
+
+-- Retrieve student name, attendance whose attendance is 100 percent. 
+SELECT student.s_name, attendence.attendence FROM student INNER JOIN attendence ON student.s_id = attendence.s_id WHERE attendence=100;
+
+-- Retrieve the student’s name, student marks, and for MCA students:
+seLECT Student.s_name, Stud_perf.mArks frOM Student inNER JoIN Stud_perf on Student.s_id = Stud_perf.s_id whERE C_id='1010MCA';
+
+-- Retrieve the course name, student name, and attendance for all students:
+seLECT Course.c_name, Student.s_name, Attendence.aTtendence frOM Student inNER JoIN Course on Student.c_id = Course.c_id inNER JoIN Attendence on Student.s_id = Attendence.s_id ;
